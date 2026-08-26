@@ -1,0 +1,17 @@
+# Data and artifacts
+/dataset/
+/Kronos/
+splits/
+store/
+frames.pkl
+*.faiss
+*.h5
+*.arrayrecord
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Env
+.env

@@ -1,0 +1,27 @@
+# JAX / Flax (NNX)
+jax
+flax>=0.12.0
+optax
+
+# Data pipeline
+grain
+array-record
+alpaca-py
+pandas
+numpy
+
+# Model transfer (PyTorch checkpoints -> Flax)
+torch
+safetensors
+huggingface_hub
+
+# RAG store
+faiss-cpu
+h5py
+
+# Plotting
+matplotlib
+
+# Misc
+einshape
+jax-einshape
