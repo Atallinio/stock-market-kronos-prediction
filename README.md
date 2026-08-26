@@ -56,6 +56,10 @@ python main.py --model base evaluate --k 10 --tau 0.1 --sim-threshold 0.98
 python main.py --model base example --batch 0 --sample 0
 ```
 
+That last command produces `assets/kronos_example.png` — the query window (top, with the actual future dashed), its most similar store entry and the similarity-weighted forecast (bottom):
+
+![Prediction example: query window, retrieved neighbor and forecast](assets/kronos_example.png)
+
 `--model` selects the Kronos variant: `base`, `small` or `mini` (checkpoints: `NeoQuasar/Kronos-{base,small,mini}` with their matching tokenizers). All commands accept `--help`.
 
 The notebook path is equivalent: fetch → build-windows → `build_db` → `rag_profit_probability` / `rag_single_example`.
