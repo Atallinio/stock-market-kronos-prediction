@@ -41,10 +41,10 @@ export ALPACA_SECRET_KEY=...
 
 ```bash
 # download minute bars (default: S&P 500 tickers, 2 years)
-python main.py --model base fetch
+python main.py fetch
 
 # build normalized train/val windows
-python main.py --model base build-windows --lookback 90 --predict 10
+python main.py build-windows --lookback 90 --predict 10
 
 # build the RAG store from the train windows
 python main.py --model base build-db
