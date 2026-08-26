@@ -12,6 +12,7 @@ repo location via kronos_path instead).
 """
 
 import logging
+import os
 import sys
 
 import jax.numpy as jnp
@@ -129,28 +130,28 @@ def load_models(model_name="base", kronos_path="Kronos"):
     Returns:
         (tokenizer, model) as nnx.Module, both in eval mode.
     """
-    from model import (
-        Kronos, KronosTokenizer,
-        TOKENIZER_BASE_CONFIG, KRONOS_BASE_CONFIG, KRONOS_SMALL_CONFIG, KRONOS_MINI_CONFIG,
-    )
+    import kronos_flax
 
     if model_name not in MODEL_HF_IDS:
         raise ValueError(f"Unknown model {model_name!r}; choose from {sorted(MODEL_HF_IDS)}")
 
     kronos_hf, tokenizer_hf = MODEL_HF_IDS[model_name]
     kronos_config = {
-        "base": KRONOS_BASE_CONFIG,
-        "small": KRONOS_SMALL_CONFIG,
-        "mini": KRONOS_MINI_CONFIG,
+        "base": kronos_flax.KRONOS_BASE_CONFIG,
+        "small": kronos_flax.KRONOS_SMALL_CONFIG,
+        "mini": kronos_flax.KRONOS_MINI_CONFIG,
     }[model_name]
 
-    if kronos_path not in sys.path:
-        sys.path.insert(0, kronos_path)
-    from Kronos.model.kronos import Kronos as PyTorchKronos, KronosTokenizer as PyTorchKronosTokenizer
+    # Upstream Kronos uses absolute imports (`from model.module import *`),
+    # so its repo directory itself (not the parent) must be on sys.path.
+    kronos_abs = os.path.abspath(kronos_path)
+    if kronos_abs not in sys.path:
+        sys.path.insert(0, kronos_abs)
+    from model.kronos import Kronos as PyTorchKronos, KronosTokenizer as PyTorchKronosTokenizer
 
     rngs = nnx.Rngs(0)
-    tokenizer = KronosTokenizer(TOKENIZER_BASE_CONFIG, rngs=rngs)
-    model = Kronos(kronos_config, rngs=rngs)
+    tokenizer = kronos_flax.KronosTokenizer(kronos_flax.TOKENIZER_BASE_CONFIG, rngs=rngs)
+    model = kronos_flax.Kronos(kronos_config, rngs=rngs)
 
     logger.info("Loading %s from HuggingFace (tokenizer: %s)...", kronos_hf, tokenizer_hf)
     pt_tokenizer = PyTorchKronosTokenizer.from_pretrained(tokenizer_hf)

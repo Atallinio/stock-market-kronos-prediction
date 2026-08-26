@@ -16,7 +16,7 @@ Instead of applying hand-crafted trading rules to a candle sequence, we encode t
 | File | Role |
 |---|---|
 | `main.py` | CLI entry point |
-| `model.py` | Flax NNX port of KronosTokenizer + Kronos (base/small/mini configs) |
+| `kronos_flax.py` | Flax NNX port of KronosTokenizer + Kronos (base/small/mini configs) |
 | `transfer.py` | Loads official HuggingFace checkpoints and transfers weights into the Flax port |
 | `fetch_data.py` | Alpaca minute-bar download + normalized window serialization |
 | `dataset.py` | Grain dataloaders over the window files |
