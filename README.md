@@ -1,4 +1,4 @@
-# Kronos RAG
+# Stock Market Kronos Prediction
 
 Retrieval-augmented forecasting on top of [Kronos](https://github.com/shiyu-coder/Kronos), a foundation model for financial candlesticks.
 

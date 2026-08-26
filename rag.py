@@ -268,9 +268,9 @@ def rag_single_example(dataset, db_path, lookback, tokenizer, model, k=1, batch_
         ax.set_xlim(-0.5, n_past + len(fut) - 0.5)
 
     fig, axes = plt.subplots(k + 1, 2, figsize=(16, 3.5 * (k + 1)),
-                             sharex="col", gridspec_kw={"height_ratios": [2] * (k + 1)})
-    if k == 1:
-        axes = axes[None, :]
+                         sharex="col",
+                         gridspec_kw={"height_ratios": [2] * (k + 1)},
+                         squeeze=False)
 
     draw_candles(axes[0, 0], candle[0], future,
                  f"query {ticker} — past + actual future")

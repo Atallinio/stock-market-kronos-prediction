@@ -16,13 +16,6 @@ from einshape import jax_einshape as einshape
 from flax import nnx
 
 
-import jax
-import jax.numpy as jnp
-import optax
-from einshape import jax_einshape as einshape
-from flax import nnx
-
-
 class BinarySphericalQuantizer(nnx.Module):
     def __init__(self, embed_dim, beta, gamma0, gamma, zeta, group_size, inv_temperature=1.0, l2_norm=True, rngs=nnx.Rngs(0)):
         self.embed_dim = embed_dim
